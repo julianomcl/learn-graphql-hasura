@@ -14,7 +14,7 @@ jobs:
           name: "preview-learn-graphql-hasura-${{github.env.GITHUB_HEAD_REF}}${{github.event.number}}"
           
           hasuraProjectDirectoryPath: /hasura
-          region: us-west2
+          region: us-west-1
           tier: cloud_free
           hasuraEnv: |
             HASURA_GRAPHQL_JWT_SECRET='{     "key": "-----BEGIN CERTIFICATE-----\nMIIDHTCCAgWgAwIBAgIJfLLEmiY9RYJvMA0GCSqGSIb3DQEBCwUAMCwxKjAoBgNV\nBAMTIWRldi1nZ3R4NXp6cXFobWl2dHprLnVzLmF1dGgwLmNvbTAeFw0yMjEwMjYw\nMTU5NDhaFw0zNjA3MDQwMTU5NDhaMCwxKjAoBgNVBAMTIWRldi1nZ3R4NXp6cXFo\nbWl2dHprLnVzLmF1dGgwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC\nggEBAM+Zwyt3CwebbLL9F6aUouiP7L5DOxjfeqtFDYeKQww2APy+nE9P67RBoDvj\nHqQ1b4hYuVVOXEFnkp+ncV/bLwkJUE42TDLrK+/IpHqsYIH10oK+VYOUOqgIokzh\nYTmn63hR5B0ArjcCCNiNBuPGEAepOUMxCvqKHxpg2i3ZZrHQtD8SVfcUCgjTKXzV\nkPEbUarKxHTM33Vr7IMmPj13S3JOtnHOCormIqCKoBy4+PyBOdaYoMHDcSbHwl0Y\nKI1r7Qrs9BEy5IWd9HFISM6YPtYUmNGHVTuFLKJYzXtDN3Q3UioJTnR0+DjkhpBf\nrgOVo2XmmCd+UbP0oXv2nlly5pkCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAd\nBgNVHQ4EFgQUVd8w97TQXAaPR4d8k5FXbRVp2OQwDgYDVR0PAQH/BAQDAgKEMA0G\nCSqGSIb3DQEBCwUAA4IBAQCeSkaZ+oD9McZxZifg59eNZm6CpKR6SXWNF/VvgGN6\niVhV7nVdqScS+lYvwnPptX1O0JKODf+JDpP/QJdfqAFUL7TxLso0onkcSbrC6oiP\nMSYIeW4P/LcBv+Q4GszHEoAf57CZvbbhK/2TVIFYz9lTC1g04FytpVHDOVeQmieC\nP9MhmB7CQwRiVCDqOt8sqsz+c6o6ENXz+q7kwbH+kWTxiJ2vwQtSRvBLL4D3gkif\nLwcdY6+Dx1PRTDNDbCfgwNuAC5gWBKpKLCtm/BqkMd4OgzTorDo/X2Pjg00Gsoih\nqk7+N+WUOaQ4IkvfrpXmoXwb4Jpw1K2Y1TTctWuhdskw\n-----END CERTIFICATE-----",     "type": "RS512" }'
