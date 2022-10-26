@@ -1,0 +1,34 @@
+name: 'preview-apps'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  hasura-cloud-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hasura/hasura-cloud-preview-apps@v0.1.9
+        with:
+          name: "preview-learn-graphql-hasura-${{github.env.GITHUB_HEAD_REF}}${{github.event.number}}"
+          postgresDBConfig: |
+            POSTGRES_SERVER_CONNECTION_URI=${{secrets.POSTGRES_SERVER_CONNECTION_URI}}
+            PG_ENV_VARS_FOR_HASURA=PG_DATABASE_URL
+          hasuraProjectDirectoryPath: /hasura
+          region: us-west2
+          tier: cloud_free
+          hasuraEnv: |
+            HASURA_GRAPHQL_JWT_SECRET='{     "key": "-----BEGIN CERTIFICATE-----\nMIIDHTCCAgWgAwIBAgIJfLLEmiY9RYJvMA0GCSqGSIb3DQEBCwUAMCwxKjAoBgNV\nBAMTIWRldi1nZ3R4NXp6cXFobWl2dHprLnVzLmF1dGgwLmNvbTAeFw0yMjEwMjYw\nMTU5NDhaFw0zNjA3MDQwMTU5NDhaMCwxKjAoBgNVBAMTIWRldi1nZ3R4NXp6cXFo\nbWl2dHprLnVzLmF1dGgwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC\nggEBAM+Zwyt3CwebbLL9F6aUouiP7L5DOxjfeqtFDYeKQww2APy+nE9P67RBoDvj\nHqQ1b4hYuVVOXEFnkp+ncV/bLwkJUE42TDLrK+/IpHqsYIH10oK+VYOUOqgIokzh\nYTmn63hR5B0ArjcCCNiNBuPGEAepOUMxCvqKHxpg2i3ZZrHQtD8SVfcUCgjTKXzV\nkPEbUarKxHTM33Vr7IMmPj13S3JOtnHOCormIqCKoBy4+PyBOdaYoMHDcSbHwl0Y\nKI1r7Qrs9BEy5IWd9HFISM6YPtYUmNGHVTuFLKJYzXtDN3Q3UioJTnR0+DjkhpBf\nrgOVo2XmmCd+UbP0oXv2nlly5pkCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAd\nBgNVHQ4EFgQUVd8w97TQXAaPR4d8k5FXbRVp2OQwDgYDVR0PAQH/BAQDAgKEMA0G\nCSqGSIb3DQEBCwUAA4IBAQCeSkaZ+oD9McZxZifg59eNZm6CpKR6SXWNF/VvgGN6\niVhV7nVdqScS+lYvwnPptX1O0JKODf+JDpP/QJdfqAFUL7TxLso0onkcSbrC6oiP\nMSYIeW4P/LcBv+Q4GszHEoAf57CZvbbhK/2TVIFYz9lTC1g04FytpVHDOVeQmieC\nP9MhmB7CQwRiVCDqOt8sqsz+c6o6ENXz+q7kwbH+kWTxiJ2vwQtSRvBLL4D3gkif\nLwcdY6+Dx1PRTDNDbCfgwNuAC5gWBKpKLCtm/BqkMd4OgzTorDo/X2Pjg00Gsoih\nqk7+N+WUOaQ4IkvfrpXmoXwb4Jpw1K2Y1TTctWuhdskw\n-----END CERTIFICATE-----",     "type": "RS512" }'
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          HASURA_CLOUD_ACCESS_TOKEN: ${{secrets.HASURA_CLOUD_ACCESS_TOKEN}}
+      - uses: hasura/comment-progress@v2.1.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          id: preview_app_comment
+          number: ${{github.event.number}}
+          repository: ${{env.GITHUB_REPOSITORY}}
+          message: |
+            Console URL available at ${{steps.hasura_cloud_preview.outputs.consoleURL}}
+            GraphQL Endpoint available at ${{steps.hasura_cloud_preview.outputs.graphQLEndpoint}}
